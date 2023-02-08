@@ -194,6 +194,7 @@ import { Drag, DropList } from 'vue-easy-dnd';
 import { COMMON, INDIA, PHILIPPINES } from '../composables/countries';
 import { onMounted, ref } from 'vue';
 import { RectangleGroupIcon } from '@heroicons/vue/24/outline';
+import { notificationMessage } from '../composables/notifications-message'
 import {
 	Bars4Icon,
 	ChatBubbleLeftEllipsisIcon,
@@ -238,7 +239,7 @@ const onInsertIndia = (event) => {
 	if (event.data.country != INDIA) {
 		notification.value = true;
 		isError.value = true;
-        notificationTitle.value = 'This city is not belongs to India';
+        notificationTitle.value = notificationMessage.drop_error;
 		closeNotification();
 		return;
 	}
@@ -247,7 +248,7 @@ const onInsertIndia = (event) => {
 	cities.value = cities.value.filter((city) => city.id != event.data.id);
 	notification.value = true;
 	isError.value = false;
-	notificationTitle.value = 'Successfully moved to India';
+	notificationTitle.value = notificationMessage.drop_success + ' ' + INDIA;
 	closeNotification();
 };
 
@@ -255,7 +256,7 @@ const onInsertPhilippines = (event) => {
 	if (event.data.country != PHILIPPINES) {
 		notification.value = true;
 		isError.value = true;
-        notificationTitle.value = 'This city is not belongs to Philippines';
+        notificationTitle.value = notificationMessage.drop_error;
 		closeNotification();
 		return;
 	}
@@ -263,7 +264,7 @@ const onInsertPhilippines = (event) => {
 	cities.value = cities.value.filter((city) => city.id != event.data.id);
 	notification.value = true;
 	isError.value = false;
-	notificationTitle.value = 'Successfully moved to Philippines';
+	notificationTitle.value = notificationMessage.drop_success + ' ' + PHILIPPINES;
 	closeNotification();
 };
 
