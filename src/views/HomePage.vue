@@ -139,35 +139,24 @@ const notificationTitle = ref('');
 const india = ref([]);
 const onInsertIndia = (event) => {
 	if (event.data.country != INDIA) {
-		notification.value = true;
-		isError.value = true;
-        notificationTitle.value = notificationMessage.drop_error;
-		closeNotification();
+		showNotification(notificationMessage.drop_error, true)
 		return;
 	}
 
 	india.value.splice(event.index, 0, event.data);
 	cities.value = cities.value.filter((city) => city.id != event.data.id);
-	notification.value = true;
-	isError.value = false;
-	notificationTitle.value = notificationMessage.drop_success + ' ' + INDIA;
+	showNotification(`${notificationMessage.drop_success} ${INDIA}`, false)
 	closeNotification();
 };
 
 const onInsertPhilippines = (event) => {
 	if (event.data.country != PHILIPPINES) {
-		notification.value = true;
-		isError.value = true;
-        notificationTitle.value = notificationMessage.drop_error;
-		closeNotification();
+		showNotification(notificationMessage.drop_error, true)
 		return;
 	}
 	philippines.value.splice(event.index, 0, event.data);
 	cities.value = cities.value.filter((city) => city.id != event.data.id);
-	notification.value = true;
-	isError.value = false;
-	notificationTitle.value = notificationMessage.drop_success + ' ' + PHILIPPINES;
-	closeNotification();
+	showNotification(`${notificationMessage.drop_success} ${PHILIPPINES}`, false)
 };
 
 const handleCloseNotification = () => {
@@ -177,6 +166,17 @@ const handleCloseNotification = () => {
 const closeNotification = () => {
 	setTimeout(() => {
 		notification.value = false;
+	}, 2000);
+};
+
+
+const showNotification = (message, errorStatus) => {
+	errorStatus ? isError.value = true : isError.value = false;
+	notification.value = true;
+	notificationTitle.value = message
+	setTimeout(() => {
+		notification.value = false;
+		isError.value = false
 	}, 2000);
 };
 

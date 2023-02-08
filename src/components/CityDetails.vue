@@ -11,7 +11,7 @@ import { defineProps, computed } from 'vue';
 const props = defineProps({
     city: {
         type: Object,
-        default: () => { }
+        default: () => {}
     }
 })
 
