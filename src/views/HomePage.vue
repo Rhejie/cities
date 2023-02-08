@@ -146,7 +146,6 @@ const onInsertIndia = (event) => {
 	india.value.splice(event.index, 0, event.data);
 	cities.value = cities.value.filter((city) => city.id != event.data.id);
 	showNotification(`${notificationMessage.drop_success} ${INDIA}`, false)
-	closeNotification();
 };
 
 const onInsertPhilippines = (event) => {
@@ -162,13 +161,6 @@ const onInsertPhilippines = (event) => {
 const handleCloseNotification = () => {
 	notification.value = false;
 };
-
-const closeNotification = () => {
-	setTimeout(() => {
-		notification.value = false;
-	}, 2000);
-};
-
 
 const showNotification = (message, errorStatus) => {
 	errorStatus ? isError.value = true : isError.value = false;
