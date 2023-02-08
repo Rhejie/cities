@@ -15,78 +15,23 @@
 					<div class="drop-zone flex">
 						<div
 							class="w-full h-full mx-auto bg-gray-100 mr-4 rounded-lg shadow-md">
-							<div class="">
-								<div class="flex px-2 pt-4 sm:px-6">
-									<div class="flex min-w-0 flex-1">
-										<div
-											class="min-w-0 flex-1 px-2 md:grid md:grid-cols-2 md:gap-4">
-											<p
-												class="truncate inline-flex text-sm font-medium text-gray-600">
-												<RectangleGroupIcon
-													class="h-5 w-5 text-gray-500 mr-2"
-													aria-hidden="true" />
-												Common
-											</p>
-										</div>
-									</div>
-									<div class="bg-white px-1 rounded-lg flex">
-										<ChatBubbleLeftEllipsisIcon
-											class="h-5 w-5 text-gray-400 mr-2"
-											aria-hidden="true" />
-										<PlusIcon
-											class="h-5 w-5 text-gray-400 mr-2"
-											aria-hidden="true" />
-										<Bars4Icon
-											class="h-5 w-5 text-gray-400"
-											aria-hidden="true" />
-									</div>
-								</div>
-							</div>
-							<div class="hidden sm:block" aria-hidden="true">
-								<div class="py-2">
-									<div class="border-t border-gray-200" />
-								</div>
-							</div>
+							<KanbanHeader :title="'Common'" :show-buttons="true"/>
+							<LineLayout/>
 							<div class="w-96 px-2">
 								<drag
 									v-for="city in cities"
 									:data="city"
 									class="item px-2 mb-4"
 									:key="city">
-									<p class="text-gray-500 mt-4 mb-2 flex">
-										<RectangleGroupIcon
-											class="h-5 w-5 text-gray-500 mr-2"
-											aria-hidden="true" />
-										{{ city.name }}
-									</p>
-									<img :src="city.image" alt="" class="shadow-lg"/>
+									<CityDetails :city="city"/>
 								</drag>
 							</div>
 						</div>
 						<!-- india -->
 						<div
 							class="w-full h-full mx-auto bg-gray-100 mr-4 rounded-lg  shadow-md">
-							<div class="">
-								<div class="flex px-2 pt-4 sm:px-6">
-									<div class="flex min-w-0 flex-1">
-										<div
-											class="min-w-0 flex-1 px-2 md:grid md:grid-cols-2 md:gap-4">
-											<p
-												class="truncate inline-flex text-sm font-medium text-gray-600">
-												<RectangleGroupIcon
-													class="h-5 w-5 text-gray-500 mr-2"
-													aria-hidden="true" />
-												India
-											</p>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="hidden sm:block" aria-hidden="true">
-								<div class="py-2">
-									<div class="border-t border-gray-200" />
-								</div>
-							</div>
+							<KanbanHeader :title="'India'"/>
+							<LineLayout/>
 							<drop-list
 								:items="india"
 								class="w-96 h-full"
@@ -94,55 +39,22 @@
 								@reorder="$event.apply(india)">
 								<template v-slot:item="{ item }">
 									<drag
-										class="item px-2"
+										class="item px-2 mb-4"
 										:key="item.id"
 										:data="item">
-										<p class="text-gray-500 mt-4 mb-2 flex">
-											<RectangleGroupIcon
-												class="h-5 w-5 text-gray-500 mr-2"
-												aria-hidden="true" />
-											{{ item.name }}
-										</p>
-										<img :src="item.image" alt="" />
+										<CityDetails :city="item"/>
 									</drag>
 								</template>
 								<template v-slot:feedback="{ data }">
-									<div class="px-2" :key="data.id">
-										<p class="text-gray-500 mt-4 mb-2 flex">
-											<RectangleGroupIcon
-												class="h-5 w-5 text-gray-500 mr-2"
-												aria-hidden="true" />
-											{{ data.name }}
-										</p>
-										<img :src="data.image" alt="" />
-									</div>
+									<DropFeedback :key="data.id" :city="data"/>
 								</template>
 							</drop-list>
 						</div>
 						<!-- Philippines -->
 						<div
 							class="w-full h-full mx-auto bg-gray-100 mr-2 rounded-lg  shadow-md">
-							<div class="">
-								<div class="flex px-2 pt-4 sm:px-6">
-									<div class="flex min-w-0 flex-1">
-										<div
-											class="min-w-0 flex-1 px-2 md:grid md:grid-cols-2 md:gap-4">
-											<p
-												class="truncate inline-flex text-sm font-medium text-gray-600">
-												<RectangleGroupIcon
-													class="h-5 w-5 text-gray-500 mr-2"
-													aria-hidden="true" />
-												Philippines
-											</p>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="hidden sm:block" aria-hidden="true">
-								<div class="py-2">
-									<div class="border-t border-gray-200" />
-								</div>
-							</div>
+							<KanbanHeader :title="'Philippines'"/>
+							<LineLayout/>
 							<drop-list
 								:items="philippines"
 								class="w-96 h-full"
@@ -153,25 +65,11 @@
 										class="item px-2 mb-2"
 										:key="item"
 										:data="item">
-										<p class="text-gray-500 mt-4 mb-2 flex">
-											<RectangleGroupIcon
-												class="h-5 w-5 text-gray-500 mr-2"
-												aria-hidden="true" />
-											{{ item.name }}
-										</p>
-										<img :src="item.image" alt="" />
+										<CityDetails :city="item"/>
 									</drag>
 								</template>
 								<template v-slot:feedback="{ data }">
-									<div class="px-2" :key="data.id">
-										<p class="text-gray-500 mt-4 mb-2 flex">
-											<RectangleGroupIcon
-												class="h-5 w-5 text-gray-500 mr-2"
-												aria-hidden="true" />
-											{{ data.name }}
-										</p>
-										<img :src="data.image" alt="" />
-									</div>
+									<DropFeedback :key="data.id" :city="data"/>
 								</template>
 							</drop-list>
 						</div>
@@ -201,6 +99,10 @@ import {
 	PlusIcon,
 } from '@heroicons/vue/20/solid';
 import Notification from '../components/Notification.vue';
+import CityDetails from '../components/CityDetails.vue';
+import DropFeedback from '../components/DropFeedback.vue';
+import LineLayout from '../components/layout/LineLayout.vue'
+import KanbanHeader from '../components/Kanban/KanbanHeader.vue';
 
 const cities = ref([
 	{
